@@ -1,0 +1,8 @@
+{
+  "name": "digitalnest-theme",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "postcss src/input.css -o assets/css/theme.css"
+  }
+}

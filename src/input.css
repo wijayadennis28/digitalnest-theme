@@ -1,0 +1,530 @@
+@import "tailwindcss";
+
+@plugin "daisyui" {
+  themes: light --default;
+}
+
+/* DigitalNest Konpo fork: Konpo layout, Nest brand (Paper/Lime/Bricolage) on dark */
+@theme {
+  --color-nest-black: #1d1d1d;
+  --color-nest-surface: #242424;
+  --color-nest-card: #2e2e2e;
+  --color-nest-line: rgb(242 240 248 / 0.12);
+  --color-nest-muted: rgb(242 240 248 / 0.6);
+  --color-nest-paper: #f2f0f8;
+  --color-nest-lime: #c6f135;
+
+  --font-display: "Bricolage Grotesque", "Archivo", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Public Sans", ui-sans-serif, system-ui, sans-serif;
+}
+
+@plugin "daisyui/theme" {
+  name: "digitalnest";
+  default: true;
+  color-scheme: dark;
+  --color-base-100: #1d1d1d;
+  --color-base-200: #242424;
+  --color-base-300: #2e2e2e;
+  --color-base-content: #f2f0f8;
+  --color-primary: #c6f135;
+  --color-primary-content: #131316;
+  --radius-box: 1rem;
+  --radius-field: 9999px;
+}
+
+body {
+  @apply bg-nest-black text-base-content font-body antialiased;
+}
+
+/* Shared motion language: one curve, three durations, one rise distance. */
+:root {
+  --knpo-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --knpo-dur: 850ms;
+  --knpo-rise: 2.5rem;
+}
+
+/* Light modes: same layout, Nest Paper tokens (Customizer → Konpo Appearance) */
+body.knpo-light,
+body.knpo-light-orange {
+  --color-nest-black: #fafaf7;
+  --color-nest-surface: #ffffff;
+  --color-nest-card: #ffffff;
+  --color-nest-line: #e7e7e0;
+  --color-nest-muted: #5a5e69;
+  --color-base-100: #fafaf7;
+  --color-base-200: #ffffff;
+  --color-base-300: #f0f0ea;
+  --color-base-content: #131316;
+}
+body.knpo-light-orange {
+  --color-nest-lime: #ff9503;
+  --color-primary: #ff9503;
+  --color-primary-content: #131316;
+}
+.knpo-accent { color: var(--color-nest-lime); }
+body.knpo-light .knpo-accent { color: #4d7c0f; }
+body.knpo-light .knpo-eyebrow { color: #65a30d; }
+body.knpo-light-orange .knpo-accent { color: #c2410c; }
+body.knpo-light-orange .knpo-eyebrow { color: #c2410c; }
+.knpo-jam { --jam-pixel: var(--color-nest-lime); }
+.knpo-jam-cta:hover { color: var(--color-nest-lime); }
+body.knpo-light .knpo-jam { --jam-pixel: #65a30d; }
+body.knpo-light .knpo-jam-cta:hover { color: #65a30d; }
+body.knpo-light-orange .knpo-jam { --jam-pixel: #c2410c; }
+body.knpo-light-orange .knpo-jam-cta:hover { color: #c2410c; }
+/* Once the cursor effect is ready, the base text stays paper; the pixel layer carries the accent. */
+.knpo-jam-cta.knpo-jam-ready:hover { color: var(--color-base-content); }
+body.knpo-light .knpo-jam-cta.knpo-jam-ready:hover { color: var(--color-base-content); }
+body.knpo-light-orange .knpo-jam-cta.knpo-jam-ready:hover { color: var(--color-base-content); }
+.knpo-jam-cta:focus-visible { color: var(--color-nest-lime); outline: 2px solid currentColor; outline-offset: 6px; }
+body.knpo-light .knpo-jam-cta:focus-visible { color: #4d7c0f; }
+body.knpo-light-orange .knpo-jam-cta:focus-visible { color: #c2410c; }
+body.knpo-light .bg-nest-lime,
+body.knpo-light-orange .bg-nest-lime { color: #131316; }
+
+/* Midnight mode: Tide palette — Midnight bg, Tide surfaces/muted, Sunset accent, Fog text */
+body.knpo-midnight {
+  --color-nest-black: #24303c;
+  --color-nest-surface: #2a3a47;
+  --color-nest-card: #33474e;
+  --color-nest-line: rgb(238 238 238 / 0.14);
+  --color-nest-muted: #a9b7ba;
+  --color-nest-paper: #eeeeee;
+  --color-nest-lime: #ff9503;
+  --color-base-100: #24303c;
+  --color-base-200: #2a3a47;
+  --color-base-300: #33474e;
+  --color-base-content: #eeeeee;
+  --color-primary: #ff9503;
+  --color-primary-content: #24303c;
+}
+body.knpo-midnight .knpo-hero-media { background: radial-gradient(120% 120% at 20% 10%, #3a5157 0%, #24303c 45%, #141a21 100%); }
+
+/* Typography option: Nunito Sans for display and body (Customizer → Konpo Appearance) */
+body.knpo-font-nunito {
+  --font-display: "Nunito Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Nunito Sans", ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Clash Display — Fontshare, free for commercial use; self-hosted. */
+@font-face { font-family: "Clash Display"; src: url("../fonts/clash-display/ClashDisplay-Regular.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Clash Display"; src: url("../fonts/clash-display/ClashDisplay-Medium.woff2") format("woff2"); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: "Clash Display"; src: url("../fonts/clash-display/ClashDisplay-Semibold.woff2") format("woff2"); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: "Clash Display"; src: url("../fonts/clash-display/ClashDisplay-Bold.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
+
+/* Typography option: DM Sans + Clash Display */
+body.knpo-font-dm-clash {
+  --font-display: "Clash Display", "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "DM Sans", "Public Sans", ui-sans-serif, system-ui, sans-serif;
+}
+body.knpo-font-dm-clash .nest-display-sm,
+body.knpo-font-dm-clash .nest-display-md,
+body.knpo-font-dm-clash .nest-display-lg,
+body.knpo-font-dm-clash .knpo-jam-cta,
+body.knpo-font-dm-clash .knpo-transition-mark { font-weight: 700; letter-spacing: -0.03em; word-spacing: 0.08em; }
+
+/* 1. Frame chrome: scroll progress + hairlines */
+.nest-progress { position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 60; background: var(--color-nest-lime); transform-origin: 0 50%; scale: 0 1; animation: nest-progress linear both; animation-timeline: scroll(); }
+@keyframes nest-progress { to { scale: 1 1; } }
+@supports not (animation-timeline: scroll()) { .nest-progress { display: none; } }
+/* JS fallback for browsers without scroll-driven animations (set in wp_head). */
+html.knpo-no-st .nest-progress { display: block; animation: none; scale: 1 1; transform: scaleX(0); }
+.knpo-rail { position: fixed; top: 0; bottom: 0; left: 0; width: 3rem; z-index: 40; display: none; border-right: 1px solid var(--color-nest-line); }
+@media (min-width: 1024px) { .knpo-rail { display: flex; } }
+
+/* 2. Fluid display */
+.nest-display-sm { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.04em; line-height: 1; font-size: clamp(2rem, 4.5vw, 3.5rem); text-wrap: balance; }
+.nest-display-md { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.04em; line-height: 0.95; font-size: clamp(2.75rem, 6vw, 5rem); text-wrap: balance; }
+.nest-display-lg { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.04em; line-height: 0.95; font-size: clamp(3.5rem, 9vw, 8rem); text-wrap: balance; }
+.knpo-eyebrow { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.25em; color: var(--color-nest-lime); }
+
+/* 3. Arrow + underline */
+.nest-link { position: relative; text-decoration: none; }
+.nest-link::after { content: ""; position: absolute; left: 0; bottom: -2px; height: 1px; width: 100%; background: currentColor; transform: scaleX(0); transform-origin: 100% 50%; transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1); }
+.nest-link:hover::after { transform: scaleX(1); transform-origin: 0 50%; }
+.btn-arrow::after { content: "↗"; margin-left: 0.5rem; display: inline-block; transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1); }
+.btn-arrow:hover::after { transform: translate(2px, -2px); }
+
+/* Cursor-origin ripple: the fill grows from where the pointer enters and shrinks where it leaves. */
+.btn,
+[data-ripple] { position: relative; overflow: hidden; isolation: isolate; }
+.btn-ripple { position: absolute; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+/* shortcut: 2× width covers pill and card targets; use 2× the diagonal if square icon buttons get the ripple. */
+/* #ff9503 is the DigitalNest logo orange and the midnight-mode primary button. */
+.btn-ripple-dot { position: absolute; left: var(--ripple-x, 50%); top: var(--ripple-y, 50%); width: 200%; aspect-ratio: 1; border-radius: 50%; background: var(--ripple-color, #ff9503); translate: -50% -50%; scale: 0; transition: scale 0.8s cubic-bezier(0.165, 0.84, 0.44, 1); }
+.is-rippling .btn-ripple-dot { scale: 1; }
+.btn-primary { --ripple-color: var(--color-nest-paper); }
+
+/* Hero video block */
+.knpo-hero-media { height: calc(100vw * 0.56); max-height: calc(100vh - 12rem); min-height: 22rem; border-radius: 2rem; overflow: hidden; position: relative; isolation: isolate;
+  background: radial-gradient(120% 120% at 20% 10%, #3a3a1a 0%, #242424 45%, #141414 100%); }
+.knpo-hero-media-inner { position: absolute; inset: -8%; z-index: 0; will-change: transform;
+  background: radial-gradient(55% 70% at 72% 18%, rgb(255 255 255 / 0.10), transparent 62%); }
+.knpo-hero-media > :not(.knpo-hero-media-inner) { z-index: 1; }
+.knpo-play { width: 5rem; height: 5rem; border-radius: 9999px; display: grid; place-items: center; background: var(--color-nest-lime); color: #131316; font-size: 1.5rem; }
+
+/* Marquee */
+.knpo-marquee { overflow: hidden; white-space: nowrap; mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
+.knpo-marquee-track { display: inline-flex; gap: 3rem; padding-right: 3rem; animation: knpo-marquee 22s linear infinite; }
+.knpo-marquee:hover .knpo-marquee-track { animation-play-state: paused; }
+@keyframes knpo-marquee { to { transform: translateX(-50%); } }
+
+/* Stacked sticky services — each card stops below the previous heading */
+.knpo-stack { --stack-step: 8.5rem; }
+@media (min-width: 1024px) { .knpo-stack { --stack-step: 9rem; } }
+/* Scroll room so the last card can stop at its h3 line instead of hitting the container bottom. */
+.knpo-stack::after { content: ""; display: block; height: 30vh; }
+.knpo-stack-card { position: sticky; top: calc(4.5rem + var(--i) * var(--stack-step)); }
+.knpo-stack-card .knpo-stack-body { min-height: 16rem; }
+
+/* Work rows: thumb zoom */
+.knpo-work-thumb { overflow: hidden; border-radius: 2rem; }
+.knpo-work-thumb > div { transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1); }
+.knpo-work-row:hover .knpo-work-thumb > div { transform: scale(1.06); }
+
+/* Editorial data patterns: rules for lists, a spine for sequence, tables for comparison. */
+.knpo-ledger { border-top: 1px solid var(--color-nest-line); }
+.knpo-ledger-row {
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr);
+  gap: 1rem;
+  align-items: start;
+  padding: 1.15rem 0;
+  border-bottom: 1px solid var(--color-nest-line);
+  transition: background-color 0.3s var(--knpo-ease), padding-left 0.3s var(--knpo-ease);
+}
+@media (min-width: 768px) {
+  .knpo-ledger-row { grid-template-columns: 2.5rem minmax(0, 1fr); gap: 1.5rem; padding: 1.5rem 1rem 1.5rem 0; }
+}
+@media (hover: hover) {
+  .knpo-ledger-row:hover { background: color-mix(in srgb, var(--color-nest-card) 55%, transparent); padding-left: 0.75rem; }
+}
+.knpo-ledger-icon { font-size: 1.75rem; line-height: 1; color: var(--color-nest-muted); }
+
+/* Pull quote after the ledger: display type with the scrub ending on the theme accent. */
+.knpo-quote { border-left: 3px solid var(--color-nest-lime); padding-left: 1.5rem; }
+.knpo-quote-text {
+  max-width: 60rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2.8vw, 2.25rem);
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+.knpo-quote-text strong { font-weight: 700; }
+
+.knpo-spine-layout { display: grid; gap: 2.5rem; }
+@media (min-width: 1024px) {
+  .knpo-spine-layout { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 4rem; align-items: start; }
+  .knpo-spine-intro { position: sticky; top: 6rem; }
+}
+.knpo-spine { position: relative; }
+.knpo-spine-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr);
+  gap: 1.25rem;
+  padding-bottom: 2rem;
+}
+.knpo-spine-item:last-child { padding-bottom: 0; }
+.knpo-spine-item:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  left: 1.21875rem;
+  top: 2.5rem;
+  bottom: 0;
+  width: 1px;
+  background: var(--color-nest-line);
+}
+.knpo-spine-fill {
+  position: absolute;
+  left: calc(1.25rem - 1px);
+  top: 2.5rem;
+  bottom: 0;
+  width: 2px;
+  background: currentColor;
+  transform: scaleY(0);
+  transform-origin: top;
+  pointer-events: none;
+}
+.knpo-spine-node {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 1px solid var(--color-nest-line);
+  border-radius: 9999px;
+  background: var(--color-nest-black);
+  transition: border-color 0.35s var(--knpo-ease), box-shadow 0.35s var(--knpo-ease), transform 0.35s var(--knpo-ease);
+}
+.knpo-spine-item.is-active .knpo-spine-node {
+  border-color: currentColor;
+  box-shadow: 0 0 0 4px color-mix(in srgb, currentColor 16%, transparent);
+  transform: scale(1.06);
+}
+.knpo-spine-icon {
+  font-size: 1.1rem;
+  line-height: 1;
+  color: currentColor;
+  transition: color 0.35s var(--knpo-ease);
+}
+.knpo-js .knpo-spine-icon { color: var(--color-nest-muted); }
+.knpo-spine-item.is-active .knpo-spine-icon { color: currentColor; }
+.knpo-spine-meta {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-nest-muted);
+}
+
+.knpo-table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+.knpo-table thead th {
+  padding: 0.75rem 0.5rem;
+  border-bottom: 1px solid var(--color-nest-line);
+  text-align: left;
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-nest-muted);
+}
+.knpo-table tbody th,
+.knpo-table td {
+  padding: 0.8rem 0.5rem;
+  border-bottom: 1px solid var(--color-nest-line);
+  text-align: left;
+  vertical-align: middle;
+}
+.knpo-table tbody th { font-weight: 500; }
+.knpo-table tbody tr:last-child > * { border-bottom: 0; }
+.knpo-table thead th:first-child,
+.knpo-table tbody th:first-child,
+.knpo-table td:first-child { padding-left: 0; }
+.knpo-table thead th:last-child,
+.knpo-table tbody th:last-child,
+.knpo-table td:last-child { padding-right: 0; }
+@media (hover: hover) {
+  .knpo-table tbody tr:not(.knpo-datasheet-group):hover > * {
+    background: color-mix(in srgb, var(--color-nest-card) 55%, transparent);
+  }
+}
+
+.knpo-datasheet { border-top: 1px solid var(--color-nest-line); border-bottom: 1px solid var(--color-nest-line); }
+.knpo-table tbody tr.knpo-datasheet-group > th {
+  padding: 1.75rem 0 0.35rem;
+  border-bottom: 0;
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.knpo-table tbody tr.knpo-datasheet-group:first-child > th { padding-top: 0.75rem; }
+.knpo-table th.knpo-datasheet-status,
+.knpo-table td.knpo-datasheet-status { width: 4.5rem; text-align: center; }
+@media (min-width: 768px) {
+  .knpo-table th.knpo-datasheet-status,
+  .knpo-table td.knpo-datasheet-status { width: 8rem; }
+}
+.knpo-status-yes,
+.knpo-status-no { display: inline-flex; align-items: center; justify-content: center; }
+.knpo-status-icon { font-size: 1rem; line-height: 1; }
+.knpo-status-no { color: var(--color-nest-muted); }
+
+.knpo-compare { border-top: 1px solid var(--color-nest-line); border-bottom: 1px solid var(--color-nest-line); }
+.knpo-compare-icon { font-size: 1rem; line-height: 1; color: var(--color-nest-muted); }
+.knpo-compare-manual { color: var(--color-nest-muted); }
+.knpo-compare-digital { color: var(--color-base-content); }
+@media (max-width: 767px) {
+  /* Keep the headers for screen readers; the visual labels come from data-label. */
+  .knpo-compare thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+  .knpo-compare,
+  .knpo-compare tbody,
+  .knpo-compare tr,
+  .knpo-compare th,
+  .knpo-compare td { display: block; }
+  .knpo-compare tbody tr { padding: 1rem 0; border-bottom: 1px solid var(--color-nest-line); }
+  .knpo-compare tbody tr:last-child { border-bottom: 0; }
+  .knpo-compare tbody th,
+  .knpo-compare tbody td { padding: 0; border: 0; }
+  .knpo-compare tbody th { margin-bottom: 0.4rem; }
+  .knpo-compare tbody td {
+    display: grid;
+    grid-template-columns: 5.25rem minmax(0, 1fr);
+    gap: 0.5rem;
+    font-size: 0.8125rem;
+    line-height: 1.4;
+  }
+  .knpo-compare tbody td + td { margin-top: 0.35rem; }
+  .knpo-compare tbody td::before {
+    content: attr(data-label);
+    padding-top: 0.15rem;
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-nest-muted);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .knpo-ledger-row,
+  .knpo-spine-node,
+  .knpo-spine-icon { transition: none; }
+  .knpo-js .knpo-spine-icon { color: currentColor; }
+}
+
+/* Masked display lines */
+.knpo-mask { display: block; overflow: hidden; padding-bottom: 0.06em; margin-bottom: -0.06em; }
+.knpo-mask > span { display: block; }
+
+/* Section headings: the line rises only when its reveal unit enters the viewport. */
+.knpo-mask-reveal { display: block; overflow: hidden; padding-bottom: 0.06em; margin-bottom: -0.06em; }
+.knpo-mask-reveal > span { display: block; }
+@media (prefers-reduced-motion: no-preference) {
+  .knpo-js .knpo-mask-reveal > span { transform: translateY(112%); transition: transform 900ms var(--knpo-ease); }
+  .knpo-js .knpo-reveal-in .knpo-mask-reveal > span,
+  .knpo-js .knpo-mask-reveal.knpo-reveal-in > span { transform: translateY(0); }
+  .knpo-js .knpo-reveal-in .knpo-mask-reveal ~ .knpo-mask-reveal > span,
+  .knpo-js .knpo-mask-reveal.knpo-reveal-in ~ .knpo-mask-reveal > span { transition-delay: 110ms; }
+  .knpo-js .knpo-reveal-in .knpo-mask-reveal ~ .knpo-mask-reveal ~ .knpo-mask-reveal > span,
+  .knpo-js .knpo-mask-reveal.knpo-reveal-in ~ .knpo-mask-reveal ~ .knpo-mask-reveal > span { transition-delay: 220ms; }
+}
+
+/* Scroll reveals — .knpo-js is set by a tiny inline script; without JS nothing is ever hidden. */
+@media (prefers-reduced-motion: no-preference) {
+  .knpo-js .knpo-reveal:not(.knpo-reveal-in),
+  .knpo-js .knpo-stagger:not(.knpo-reveal-in) > * { opacity: 0; translate: 0 var(--knpo-rise); }
+  /* Scrolling up, the same rise comes from above; the entrance still fires once. */
+  .knpo-js.knpo-scroll-up .knpo-reveal:not(.knpo-reveal-in),
+  .knpo-js.knpo-scroll-up .knpo-stagger:not(.knpo-reveal-in) > * { --knpo-rise: -2.5rem; }
+  .knpo-js .knpo-reveal,
+  .knpo-js .knpo-stagger > * {
+    transition:
+      opacity 500ms ease-out,
+      translate var(--knpo-dur) var(--knpo-ease);
+  }
+  .knpo-js .knpo-stagger > :nth-child(2) { transition-delay: 80ms; }
+  .knpo-js .knpo-stagger > :nth-child(3) { transition-delay: 160ms; }
+  .knpo-js .knpo-stagger > :nth-child(4) { transition-delay: 240ms; }
+  .knpo-js .knpo-stagger > :nth-child(5) { transition-delay: 320ms; }
+  .knpo-js .knpo-stagger > :nth-child(6) { transition-delay: 400ms; }
+  .knpo-js .knpo-stagger > :nth-child(7) { transition-delay: 480ms; }
+  .knpo-js .knpo-stagger > :nth-child(8) { transition-delay: 560ms; }
+
+  /* Masked line entrance */
+  .knpo-js .knpo-mask > span { animation: knpo-mask-in 900ms var(--knpo-ease) both; }
+  .knpo-js .knpo-mask ~ .knpo-mask > span { animation-delay: 110ms; }
+  .knpo-js .knpo-mask ~ .knpo-mask ~ .knpo-mask > span { animation-delay: 220ms; }
+
+  /* On-load entrance for the first block of the page (hero) */
+  main > :first-child > *:where(:not(.pin-spacer)):where(:not(.knpo-hero-media)) { animation: knpo-in 700ms var(--knpo-ease) both; }
+  main > :first-child > :nth-child(2) { animation-delay: 60ms; }
+  main > :first-child > :nth-child(3) { animation-delay: 120ms; }
+  main > :first-child > :nth-child(4) { animation-delay: 180ms; }
+  main > :first-child > h1 { animation: none; }
+
+  /* The frame fades in with clip-path only, leaving transforms free for the ScrollTrigger pin. */
+  .knpo-hero .knpo-hero-media { animation: knpo-frame-in 800ms var(--knpo-ease) 180ms both; }
+}
+
+@keyframes knpo-mask-in { from { transform: translateY(112%); } }
+@keyframes knpo-in { from { opacity: 0; translate: 0 1rem; } }
+@keyframes knpo-frame-in {
+  from { opacity: 0; clip-path: inset(6% 6% 6% 6% round 2rem); }
+  to { opacity: 1; clip-path: inset(0 round 2rem); }
+}
+
+/* Safety net: if the observer never starts, never leave content hidden. */
+html.knpo-reveals-fallback .knpo-reveal:not(.knpo-reveal-in),
+html.knpo-reveals-fallback .knpo-stagger:not(.knpo-reveal-in) > * { opacity: 1; translate: none; transition: none; }
+html.knpo-reveals-fallback .knpo-mask-reveal > span { transform: none; transition: none; }
+
+/* Cross-document page transitions — progressive enhancement, skipped in reduced motion. */
+.knpo-header { view-transition-name: knpo-header; }
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition { navigation: auto; }
+  ::view-transition-old(root) { animation: knpo-vt-out 180ms var(--knpo-ease) both; }
+  ::view-transition-new(root) { animation: knpo-vt-in 260ms var(--knpo-ease) both; }
+}
+@keyframes knpo-vt-out { to { opacity: 0; } }
+@keyframes knpo-vt-in { from { opacity: 0; } }
+
+/* Giant footer CTA */
+.knpo-jam { position: relative; --jam-r: clamp(100px, 11vw, 150px); }
+.knpo-jam-title { --jam-r: clamp(70px, 8vw, 110px); }
+.knpo-jam-cta { font-family: var(--font-display); font-weight: 800; letter-spacing: -0.05em; line-height: 0.9; font-size: clamp(4rem, 14vw, 12rem); }
+.knpo-jam-text { display: block; }
+.knpo-jam-pixel {
+  position: absolute;
+  inset: 0;
+  display: block;
+  pointer-events: none;
+  user-select: none;
+  color: var(--jam-pixel);
+  clip-path: circle(0px at var(--jam-x, 50%) var(--jam-y, 50%));
+  transition: clip-path 240ms var(--knpo-ease);
+}
+.knpo-jam.is-jam-active .knpo-jam-pixel { clip-path: circle(var(--jam-r) at var(--jam-x, 50%) var(--jam-y, 50%)); }
+@media (prefers-reduced-motion: reduce) { .knpo-jam-pixel { transition: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .nest-progress,
+  html.knpo-no-st .nest-progress { display: none; }
+  .nest-link::after, .btn-arrow::after, .btn-ripple-dot { transition: none; }
+  .knpo-marquee-track { animation: none; }
+  .knpo-work-thumb > div { transition: none; }
+  .knpo-work-row:hover .knpo-work-thumb > div { transform: none; }
+}
+
+/* Lenis */
+html.lenis,
+html.lenis body { height: auto; }
+.lenis:not(.lenis-autoToggle).lenis-stopped { overflow: clip; }
+.lenis [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-smooth iframe { pointer-events: none; }
+
+/* SplitText line masks */
+.knpo-split-line { will-change: transform; }
+.knpo-split-line-mask { padding-bottom: 0.06em; margin-bottom: -0.06em; }
+@media (prefers-reduced-motion: no-preference) {
+  html.knpo-js [data-split]:not(.knpo-split-done) { opacity: 0; }
+}
+
+/* Scroll-scrubbed copy fill */
+[data-scrub] { --knpo-scrub-start: rgba(242, 240, 248, 0.28); }
+body.knpo-light [data-scrub],
+body.knpo-light-orange [data-scrub] { --knpo-scrub-start: #b7b7ae; }
+body.knpo-midnight [data-scrub] { --knpo-scrub-start: rgba(238, 238, 238, 0.3); }
+
+/* Auto-hiding header */
+.knpo-header { transition: transform 0.45s var(--knpo-ease); will-change: transform; }
+.knpo-header.knpo-header-hidden { transform: translate3d(0, -101%, 0); }
+
+/* Barba page transition */
+.knpo-transition { position: fixed; inset: 0; z-index: 100; visibility: hidden; pointer-events: none; }
+.knpo-transition.is-active { visibility: visible; pointer-events: auto; }
+.knpo-transition-panel { position: absolute; inset: 0; background: var(--color-nest-lime); transform: translate3d(0, 101%, 0); will-change: transform; }
+.knpo-transition-mark { position: absolute; inset: 0; display: grid; place-items: center; margin: 0; color: #131316; font-family: var(--font-display); font-weight: 800; font-size: clamp(2.5rem, 8vw, 7rem); letter-spacing: -0.06em; opacity: 0; }
+.knpo-announcer { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+main:focus { outline: none; }
+
+@media (hover: hover) and (pointer: fine) {
+  .btn-primary { will-change: transform; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .knpo-header { transition: none; }
+  .knpo-transition { display: none; }
+}
